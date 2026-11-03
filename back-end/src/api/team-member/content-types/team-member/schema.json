@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "team_members",
+  "info": {
+    "singularName": "team-member",
+    "pluralName": "team-members",
+    "displayName": "Membre d'équipe"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nom": {
+      "type": "string",
+      "required": true
+    },
+    "poste": {
+      "type": "string"
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "bio": {
+      "type": "text"
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article",
+      "mappedBy": "auteur"
+    }
+  }
+}

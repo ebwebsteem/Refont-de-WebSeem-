@@ -1,69 +1,46 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import type { Metadata } from "next";
+import { ClientsStrip } from "@/components/home/ClientsStrip";
+import { Hero } from "@/components/home/Hero";
+import { NeedsSection } from "@/components/home/NeedsSection";
+import { ProcessSection } from "@/components/home/ProcessSection";
+import { ReferencesSection } from "@/components/home/ReferencesSection";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+import { VisibilitySection } from "@/components/home/VisibilitySection";
+import { CtaBanner } from "@/components/sections/CtaBanner";
+import { OfficesSection } from "@/components/sections/OfficesSection";
+import { siteConfig } from "@/config/site";
 
-export default function Home() {
+// title.absolute : ignore le modèle "%s | WebSteem" du layout racine pour l'accueil
+export const metadata: Metadata = {
+  title: { absolute: "WebSteem — Agence web à Grenoble et Saint-Cyr-sur-Mer" },
+  description:
+    "Un site qui vous amène des clients, et une équipe qui reste à vos côtés. Agence web pour artisans, commerçants, professions libérales et associations.",
+};
+
+/**
+ * Page d'accueil (maquette « 02-accueil-desktop » / « 03-accueil-mobile »).
+ *
+ * La page ne fait qu'assembler les sections, dans l'ordre de la maquette.
+ * Tout le contenu est statique (dossier src/content) : la page est générée
+ * en HTML au build. Les données Strapi (articles, équipe) sont utilisées sur
+ * les pages Blog et Équipe.
+ */
+export default function HomePage() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <Hero />
+      <ClientsStrip />
+      <NeedsSection />
+      <ProcessSection />
+      <VisibilitySection />
+      <OfficesSection />
+      <ReferencesSection />
+      <TestimonialsSection />
+      <CtaBanner
+        withPortrait
+        title="Parlons de votre projet, simplement."
+        text={`Un premier échange de 30 minutes, gratuit et sans engagement. ${siteConfig.contact.firstName} vous écoute et vous dit honnêtement si on peut vous aider. À Grenoble, à Saint-Cyr-sur-Mer ou en visio.`}
+      />
+    </>
   );
 }
